@@ -1,57 +1,50 @@
 package com.belong.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-
+import java.util.concurrent.ConcurrentHashMap;
 
 public class RegisteredCustomers {
-	
-	
-	//Singleton Instance
-	private static List<Customer> registeredCustomers;
-	
+
+	// Singleton Instance
+	private static Map<String, Customer> registeredCustomers;
+
 	static {
-		registeredCustomers = new ArrayList<>();
+		registeredCustomers = new ConcurrentHashMap<>();
 	}
-	
+
 	private RegisteredCustomers() {
 	}
-	
-	public static List<Customer> getRegisterdCustomers() {
+
+	public static Map<String, Customer> getRegisterdCustomers() {
 		return registeredCustomers;
 	}
-	
+
 	public static Optional<Customer> getCustomerFromRegisteredList(String customerId) {
-		return getRegisterdCustomers().stream()
-				.filter(customer -> customer.getCustomerId().equals(customerId))
-				.findFirst();
+		return Optional.ofNullable(getRegisterdCustomers().get(customerId));
 	}
-	
-	public static void activatePhoneNumber(String customerId, String customerName, String phoneType, String phoneNumber) {
+
+	public static void activatePhoneNumber(String customerId, String customerName, String phoneType,
+			String phoneNumber) {
 		Customer customer = getOrRegisterCustomer(customerId, customerName);
 		Phone phone = new Phone(phoneNumber, phoneType);
-		customer.setPhone(phone);	
+		customer.setPhone(phone);
 	}
-	
-	
-	
+
 	private static Customer getOrRegisterCustomer(String customerId, String fullName) {
 		Optional<Customer> customer = getCustomerFromRegisteredList(customerId);
-		if(customer.isPresent()) {
+		if (customer.isPresent()) {
 			return customer.get();
-		}
-		else {
+		} else {
 			Customer registeredCustomer = new Customer(customerId, fullName);
 			addCustomer(registeredCustomer);
 			return registeredCustomer;
 		}
-		
+
 	}
-	
+
 	private static void addCustomer(Customer customer) {
-		registeredCustomers.add(customer);
+		registeredCustomers.put(customer.getCustomerId(), customer);
 	}
-	
 
 }

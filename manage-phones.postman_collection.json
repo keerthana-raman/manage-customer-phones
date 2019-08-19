@@ -1,0 +1,53 @@
+{
+	"variables": [],
+	"info": {
+		"name": "manage-phones",
+		"_postman_id": "a8279f84-6b78-97e9-d092-9a9f918b5965",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Activate Phone",
+			"request": {
+				"url": "localhost:8080/customer-phone/activate",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"customerName\":\"ABCD\",\n\t\"customerId\":\"1232335\",\n\t\"phoneNumber\":\"0424233889\",\n\t\"phoneType\":\"MOBILE\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Phones",
+			"request": {
+				"url": "localhost:8080/customer-phone/all",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer's phone",
+			"request": {
+				"url": "localhost:8080/customer-phone/1232335",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -3,13 +3,13 @@ package com.belong.entity;
 import com.belong.constants.PhoneTypes;
 
 public class Phone {
-	
+
 	String phoneNumber;
-	
+
 	PhoneTypes phoneType;
-	
+
 	public Phone(String phoneNumber, String phoneType) {
-		this.phoneNumber = phoneNumber;		
+		this.phoneNumber = phoneNumber;
 		this.phoneType = PhoneTypes.valueOf(phoneType);
 	}
 

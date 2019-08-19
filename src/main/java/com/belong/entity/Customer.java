@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 public class Customer {
-	
+
 	String fullName;
-	
+
 	String customerId;
 
 	List<Phone> phones;
-	
+
 	public Customer(String customerId, String fullName) {
 		this.customerId = customerId;
 		this.fullName = fullName;
@@ -33,15 +33,13 @@ public class Customer {
 	public String getCustomerId() {
 		return customerId;
 	}
-	
+
 	public void setPhone(Phone phonActivate) {
 		Optional<Phone> matchingPhone = this.phones.stream()
-										.filter(phone -> phone.getPhoneNumber().equals(phonActivate.getPhoneNumber()))
-										.findFirst();
-		if(matchingPhone.isPresent()) {
-			//throw Exception that activation already done
-		}
-		else {
+				.filter(phone -> phone.getPhoneNumber().equals(phonActivate.getPhoneNumber())).findFirst();
+		if (matchingPhone.isPresent()) {
+			// throw Exception that activation already done
+		} else {
 			this.phones.add(phonActivate);
 		}
 	}
@@ -70,6 +68,5 @@ public class Customer {
 			return false;
 		return true;
 	}
-	
-	
+
 }
